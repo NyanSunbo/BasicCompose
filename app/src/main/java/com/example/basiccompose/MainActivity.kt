@@ -13,6 +13,9 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.width
+import androidx.compose.material3.Divider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -42,7 +45,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    TaskManagerView()
+                    BusinessCardCompose()
                 }
             }
         }
@@ -119,14 +122,132 @@ private fun QuadrantComposeCard(
     }
 }
 
-@Preview(
-    name="Compose Quadrant",
-    showBackground = true
-)
+//@Preview(
+//    name="Compose Quadrant",
+//    showBackground = true
+//)
 @Composable()
 private fun QuadrantComposePreview(){
     HappyBirthdayTheme {
         QuadrantCompose()
+    }
+}
+
+// endregion
+
+// region Business Card
+
+@Composable
+private fun BusinessCardCompose(){
+    HappyBirthdayTheme {
+        BusinessCard(
+            imagePainter = painterResource(R.drawable.android_logo),
+            fullName = stringResource(R.string.business_card_full_name),
+            title = stringResource(R.string.business_card_title),
+            telephone = stringResource(R.string.business_card_telephone),
+            socialMedia = stringResource(R.string.business_card_social_media),
+            email = stringResource(R.string.business_card_email),
+        )
+    }
+}
+
+@Composable
+private fun BusinessCard(
+    imagePainter: Painter,
+    fullName: String,
+    title: String,
+    telephone: String,
+    socialMedia: String,
+    email: String,
+    modifier: Modifier = Modifier
+){
+
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .fillMaxHeight()
+            .background(Color(0xFF073042)),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally,
+    ) {
+        Image(
+            painter = imagePainter,
+            contentDescription = null,
+            modifier = Modifier
+                .width(200.dp)
+                .height(200.dp)
+        )
+        Text(
+            text = fullName,
+            fontWeight = FontWeight.Bold,
+            fontSize = 30.sp,
+            color = Color.White,
+        )
+        Text(
+            text = title,
+            fontWeight = FontWeight.Bold,
+            fontSize = 20.sp,
+            color = Color.White
+        )
+    }
+
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(bottom = 50.dp),
+        verticalArrangement = Arrangement.Bottom,
+        horizontalAlignment = Alignment.Start
+    ) {
+        Row(
+            modifier = Modifier.fillMaxWidth()
+                .padding(start = 105.dp),
+        ){
+            val image = painterResource(R.drawable.phone_iphone_24dp_e8eaed_fill0_wght400_grad0_opsz24)
+            Image(painter = image, contentDescription = null,modifier = Modifier.padding(end = 20.dp))
+            Text(
+                text = telephone,
+                modifier = Modifier.padding(4.dp),
+                color = Color.White
+            )
+        }
+        Row(
+            modifier = Modifier.fillMaxWidth()
+                .padding(start = 105.dp)
+        ){
+            val image = painterResource(R.drawable.group_24dp_e8eaed_fill0_wght400_grad0_opsz24)
+            Image(painter = image, contentDescription = null,modifier = Modifier.padding(end = 20.dp))
+            Text(
+                text = socialMedia,
+                modifier = Modifier.padding(4.dp),
+                color = Color.White
+            )
+        }
+        Row(
+            modifier = Modifier.fillMaxWidth()
+                .padding(start = 105.dp)
+        ){
+            val image = painterResource(R.drawable.mail_24dp_e8eaed_fill0_wght400_grad0_opsz24)
+            Image(painter = image, contentDescription = null,modifier = Modifier.padding(end = 20.dp))
+            Text(
+                text = email,
+                modifier = Modifier.padding(4.dp),
+                color = Color.White
+            )
+        }
+    }
+
+
+}
+
+@Preview(
+    name = "Business Card",
+    showBackground = true
+
+)
+@Composable
+private fun BusinessCardView(){
+    HappyBirthdayTheme {
+        BusinessCardCompose();
     }
 }
 
@@ -147,12 +268,12 @@ private fun TaskManagerCompose(){
 //    name="PreviewJetpack",
 //    showBackground = true
 //)
-@Composable
-fun TaskManagerView(){
-    HappyBirthdayTheme {
-        TaskManagerCompose()
-    }
-}
+//@Composable
+//fun TaskManagerView(){
+//    HappyBirthdayTheme {
+//        TaskManagerCompose()
+//    }
+//}
 
 @Composable()
 private fun TaskManagerComposeCard(
